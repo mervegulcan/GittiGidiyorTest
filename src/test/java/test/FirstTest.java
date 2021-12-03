@@ -1,5 +1,6 @@
 package test;
 
+import org.apache.log4j.Logger;
 import org.example.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,9 +23,11 @@ public class FirstTest  extends BaseTest {
     String userName = "projeodevihesabi@gmail.com";
     String userPass = "369852asd.";
 
+    final static Logger logger = Logger.getLogger(FirstTest.class);
     @Test
     public  void login() throws InterruptedException {
         //kullanıcı login olur
+        logger.info("Kullanıcı Login Olur");
         TimeUnit.SECONDS.sleep(2);
         WebElement element = driver.findElement(By.xpath("//div[@class='gekhq4-8 iHquZr']"));
         Actions act = new Actions(driver);
@@ -47,6 +50,7 @@ public class FirstTest  extends BaseTest {
 
         System.out.println("Password yazıldı");
 
+        logger.info("Ürün araması yapılır.");
         //Vazo ürünü aranır.
         WebElement productSearch = driver.findElement(By.name("k"));
         productSearch.sendKeys("Vazo"+ Keys.ENTER);
@@ -125,9 +129,14 @@ public class FirstTest  extends BaseTest {
         String adress = hataAdres.getText();
         Assert.assertEquals("Adres Bilgisi Hatalı",adress,hataAdres.getText());
 
+        WebElement hataIsım = driver.findElement(By.xpath("//div[@class='gg-input-error-text gg-d-24']"));
+        String isim = hataIsım.getText();
+        Assert.assertEquals("İsim Bilgisi Hatalı",isim,hataIsım.getText());
 
-       WebElement sepetiDuzenle = driver.findElement(By.xpath("//a[@title='Sepeti Düzenle']"));
-       sepetiDuzenle.click();
+
+
+        WebElement sepetiDuzenle = driver.findElement(By.xpath("//a[@title='Sepeti Düzenle']"));
+        sepetiDuzenle.click();
         TimeUnit.SECONDS.sleep(5);
 
         WebElement favoriSepeteEkle = driver.findElement(By.xpath("(//a[@class='gg-ui-btn-default btn-add-to-basket'])[6]"));
@@ -146,7 +155,7 @@ public class FirstTest  extends BaseTest {
         actions.moveToElement(driver.findElement(By.xpath("(//div[@class='gekhq4-4 egoSnI'])[1]"))).clickAndHold().pause(2000)
                 .click().build().perform();
 
-
+        logger.info("Kullanıcı logout olur.");
         WebElement logOut = driver.findElement(By.xpath("(//a[@class='sc-84am1q-0 sc-1r48nyr-0 dGMkVn sc-12t95ss-6 jfpyWy'])[16]"));
         logOut.click();
         System.out.println("çıkış yapıldı");
