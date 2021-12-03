@@ -24,6 +24,7 @@ public class FirstTest  extends BaseTest {
 
     @Test
     public  void login() throws InterruptedException {
+        //kullanıcı login olur
         TimeUnit.SECONDS.sleep(2);
         WebElement element = driver.findElement(By.xpath("//div[@class='gekhq4-8 iHquZr']"));
         Actions act = new Actions(driver);
@@ -46,14 +47,17 @@ public class FirstTest  extends BaseTest {
 
         System.out.println("Password yazıldı");
 
+        //Vazo ürünü aranır.
         WebElement productSearch = driver.findElement(By.name("k"));
         productSearch.sendKeys("Vazo"+ Keys.ENTER);
         Thread.sleep(10);
 
+        //Sayfa scroll edilir.
         JavascriptExecutor js = (JavascriptExecutor) driver;
         ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
         TimeUnit.SECONDS.sleep(10);
 
+        //Vazo ürü
         List<String> randomClick = new LinkedList<String>();
         String[] random = new String[5];
         List<Integer> numberList = new ArrayList<Integer>();
@@ -106,8 +110,6 @@ public class FirstTest  extends BaseTest {
         Thread.sleep(1000);
 
         Select selectProduct = new Select(driver.findElement(By.xpath("//select[@class='amount']")));
-        //selectProduct.selectByVisibleText("\n" +
-          //      "          2        ");
         selectProduct.selectByIndex(1);
         TimeUnit.SECONDS.sleep(5);
 
@@ -133,15 +135,6 @@ public class FirstTest  extends BaseTest {
         TimeUnit.SECONDS.sleep(3);
         System.out.println("sepete eklendi");
 
-        //WebElement favoriUrunSepettenCikar =driver.findElement(By.xpath("(//a[@class='btn-delete'])[7]"));
-        //favoriUrunSepettenCikar.click();
-        //System.out.println("sepetten çıkarıldı");
-
-        //TimeUnit.SECONDS.sleep(7);
-        //driver.navigate().to("https://www.gittigidiyor.com/");
-        //String currentWindow = driver.getWindowHandle();
-        //driver.findElement(By.id("tabButton")).click();
-
 
         ((JavascriptExecutor) driver).executeScript("window.open()");
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -157,17 +150,7 @@ public class FirstTest  extends BaseTest {
         WebElement logOut = driver.findElement(By.xpath("(//a[@class='sc-84am1q-0 sc-1r48nyr-0 dGMkVn sc-12t95ss-6 jfpyWy'])[16]"));
         logOut.click();
         System.out.println("çıkış yapıldı");
-
-        // String currentWindow = driver.getWindowHandle();
-
-
-
-
-
-
-
-
-
+        driver.quit();
     }
 
 
